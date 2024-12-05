@@ -44,6 +44,42 @@ where
 /// # Examples
 ///
 /// ```
+/// use common::split_into_numbers_by;
+///
+/// let (a, b) = split_into_numbers_by::<u32>("123|456", "|");
+/// assert_eq!(a, 123);
+/// assert_eq!(b, 456);
+/// ```
+pub fn split_into_numbers_by<T>(line: &str, separator: &str) -> (T, T)
+where
+    T: FromStr<Err: Debug>,
+{
+    let mut parts = line.split(separator);
+
+    let left = parts.next().unwrap().parse().unwrap();
+    let right = parts.next().unwrap().parse().unwrap();
+
+    (left, right)
+}
+
+/// # Examples
+///
+/// ```
+/// use common::split_into_numbers_vec_by;
+///
+/// let numbers = split_into_numbers_vec_by::<u32>("123,456,789,12", ",");
+/// assert_eq!(numbers, vec![123, 456, 789, 12]);
+/// ```
+pub fn split_into_numbers_vec_by<T>(line: &str, separator: &str) -> Vec<T>
+where
+    T: FromStr<Err: Debug>,
+{
+    line.split(separator).map(|s| s.parse().unwrap()).collect()
+}
+
+/// # Examples
+///
+/// ```
 /// use common::parse_into_vec_of_vecs;
 ///
 /// let input = "1 2 3\n4 5\n6 7 8 9";
