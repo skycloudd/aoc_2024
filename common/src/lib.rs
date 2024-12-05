@@ -63,6 +63,23 @@ where
 /// # Examples
 ///
 /// ```
+/// use common::parse_letter_grid;
+///
+/// let input = "abcd\nefgh\nijkl\nmnop";
+/// let result = parse_letter_grid(input);
+/// assert_eq!(result, vec![
+///     vec!['a', 'b', 'c', 'd'],
+///     vec!['e', 'f', 'g', 'h'],
+///     vec!['i', 'j', 'k', 'l'],
+///     vec!['m', 'n', 'o', 'p']
+/// ]);
+pub fn parse_letter_grid(input: &str) -> Vec<Vec<char>> {
+    input.lines().map(|line| line.chars().collect()).collect()
+}
+
+/// # Examples
+///
+/// ```
 /// use common::parse_into_vec;
 ///
 /// let result = parse_into_vec::<u32>("1 2 3 4");
