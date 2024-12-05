@@ -10,12 +10,12 @@ fn main() {
 }
 
 fn part1(input: &str) -> impl Display {
-    let (mut left, mut right) = parse_into_columns::<BinaryHeap<_>, BinaryHeap<_>, i32>(input);
+    let (mut left, mut right) = parse_into_columns::<BinaryHeap<_>, BinaryHeap<_>, usize>(input);
 
     let mut result = 0;
 
     while let (Some(l), Some(r)) = (left.pop(), right.pop()) {
-        result += (l - r).abs();
+        result += l.abs_diff(r);
     }
 
     result
@@ -23,14 +23,6 @@ fn part1(input: &str) -> impl Display {
 
 fn part2(input: &str) -> impl Display {
     let (left, right) = parse_into_columns::<Vec<_>, Vec<_>, usize>(input);
-
-    // let mut result = 0;
-
-    // for i in left {
-    //     result += i * right.iter().filter(|j| i == **j).count();
-    // }
-
-    // result
 
     left.into_iter()
         .map(|i| i * right.iter().filter(|j| i == **j).count())
